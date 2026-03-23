@@ -12,12 +12,13 @@
 BASE_DIR="baseimage"
 BASE_IMAGE_FILE="$BASE_DIR/Pharo.image"
 PHARO_CMD="$BASE_DIR/pharo"
+REPO_DIR=$(readlink -f $(dirname -- "${BASH_SOURCE[0]}")/../)
 
 # Functions
 install_veritas_for() {
   local image_path="$1"
   local veritas_bench="$2"
-  "$PHARO_CMD" --headless "$image_path" metacello install "github://jordanmontt/PharoVeritasBenchSuite:main" "$veritas_bench"
+  "$PHARO_CMD" --headless "$image_path" metacello install --save "gitlocal://$REPO_DIR" "$veritas_bench"
 
 
   echo; echo; echo
@@ -48,7 +49,7 @@ mkdir -p cormas
 cp "$BASE_DIR"/*.sources ./cormas/
 
 # install dependencies
-install_veritas_for ./cormas/cormas.image BaselineOfVeritasCormas
+install_veritas_for ./cormas/cormas.image VeritasCormas
 
 ############
 # HoneyGinger
@@ -59,7 +60,7 @@ mkdir -p hg
 cp "$BASE_DIR"/*.sources ./hg/
 
 # install dependencies
-install_veritas_for ./hg/hg.image BaselineOfVeritasHoneyGinger
+install_veritas_for ./hg/hg.image VeritasHoneyGinger
 
 ############
 # Microdown
@@ -70,7 +71,7 @@ mkdir -p micro
 cp "$BASE_DIR"/*.sources ./micro/
 
 # install dependencies
-install_veritas_for ./micro/micro.image BaselineOfVeritasMicrodown
+install_veritas_for ./micro/micro.image VeritasMicrodown
 
 # download Spec2 book
 TMP_CLONE_DIR=$(mktemp -d)
@@ -92,7 +93,7 @@ cp "$BASE_DIR"/*.sources ./df/
 install_veritas_for ./df/df.image BaselineOfVeritasDataFrame
 
 # move tiny_dataset.csv to the root of df/
-mv ./df/pharo-local/iceberg/jordanmontt/PharoVeritasBenchSuite/src/Veritas-DataFrame/tiny_dataset.csv ./df/
+cp $REPO_DIR/tiny_dataset.csv ./df/
 echo; echo; echo
 echo "dataset copied"
 
