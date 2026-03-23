@@ -90,7 +90,7 @@ mkdir -p df
 cp "$BASE_DIR"/*.sources ./df/
 
 # install dependencies
-install_veritas_for ./df/df.image BaselineOfVeritasDataFrame
+install_veritas_for ./df/df.image VeritasDataFrame
 
 # move tiny_dataset.csv to the root of df/
 cp $REPO_DIR/files/tiny_dataset.csv ./df/
