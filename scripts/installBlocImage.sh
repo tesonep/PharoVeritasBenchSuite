@@ -14,7 +14,7 @@ create_vm_script() {
 	    *)          OSNAME="UNKNOWN:${unameOut}"
 	esac
 
-	VM_DIR=.
+	VM_DIR=pharo-vm
 	VM_BINARY_NAME="Pharo"
 	VM_BINARY_NAME_LINUX="pharo"
 	VM_BINARY_NAME_WINDOWS="PharoConsole"
@@ -61,7 +61,7 @@ if [ ! -f vm.zip ]; then
 	curl --progress-bar -o vm.zip https://files.pharo.org/vm/pharo-spur64-headless/$(uname -s)-$(uname -m)/stable10.zip
 fi
 
-unzip -o -d . vm.zip  
+unzip -o -d pharo-vm vm.zip  
 create_vm_script "pharo"
 
 popd
