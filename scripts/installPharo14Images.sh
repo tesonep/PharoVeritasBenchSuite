@@ -18,7 +18,7 @@ REPO_DIR=$(readlink -f $(dirname -- "${BASH_SOURCE[0]}")/../)
 install_veritas_for() {
   local image_path="$1"
   local veritas_bench="$2"
-  "$PHARO_CMD" --headless "$image_path" metacello install --save "gitlocal://$REPO_DIR" "$veritas_bench"
+  "$PHARO_CMD" --headless "$image_path" metacello install "gitlocal://$REPO_DIR" "$veritas_bench"
 
 
   echo; echo; echo
