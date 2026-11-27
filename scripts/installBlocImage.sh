@@ -82,6 +82,7 @@ $VM Bloc.image eval --save $(cat <<EOF
 	Metacello new
 		baseline: 'BlocBenchs';
 		repository: 'github://pharo-graphics/BlocBenchs:master/src';
+		onConflictUseIncoming;
 		load.
 
 	{
